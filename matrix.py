@@ -51,7 +51,3 @@ def check_frequency(combs, string):
             new_comb = replace_special_chars(comb)
 
             combs[new_comb] += 1
-
-
-print(create_matirx('Hello my name is Brandon I am 20 years old and I live in the Netherlands'))
-
