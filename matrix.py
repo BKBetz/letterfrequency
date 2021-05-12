@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def create_matirx(string):
+def create_matrix(string):
     # create an matrix using all combinations and the given string
     lower_string = string.lower()
 
