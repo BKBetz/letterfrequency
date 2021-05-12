@@ -1,4 +1,4 @@
-from letterfrequency.matrix import create_matirx
+from letterfrequency.matrix import create_matrix
 
 
 def read_input(file: str):
@@ -15,7 +15,7 @@ def mapper(file_input: str):
     data = read_input(file_input)
 
     for x in data:
-        matirx = create_matirx(x)
+        matrix = create_matrix(x)
 
 
 
