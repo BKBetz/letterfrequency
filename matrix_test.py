@@ -23,5 +23,5 @@ def answer(test_str, en_matrix, du_matrix):
 
     total = du_count + en_count
 
-    return [en_count/total, du_count/total]
+    return {'dutch': du_count/total, 'english': en_count/total}
 
