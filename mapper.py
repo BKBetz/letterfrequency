@@ -1,5 +1,6 @@
-from matrix import create_matrix
-from reducer import reduce
+from letterfrequency.matrix import create_matrix
+from letterfrequency.reducer import reduce
+
 
 def read_input(file: str):
     """Read the given file and seperate per line"""

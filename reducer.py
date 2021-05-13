@@ -3,10 +3,16 @@ import numpy as np
 matrix = None
 first_matrix = True
 
+
 def onebyonereduce(all_matrices):
     for matrix in all_matrices:
         m = reduce(matrix)
-    return m
+
+    # convert the matrix values to percentages instead of ints
+    total = m.sum()
+    p_matrix = np.array([(m[x][y]/total * 100) for x in range(len(m)) for y in range(len(m))]).reshape((28, 28))
+    return p_matrix
+
 
 def reduce(new_matrix):
     """Adds matrices together and gives the average"""
