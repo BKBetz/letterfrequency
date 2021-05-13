@@ -1,5 +1,5 @@
-from letterfrequency.matrix import create_matrix
-
+from matrix import create_matrix
+from reducer import reduce
 
 def read_input(file: str):
     """Read the given file and seperate per line"""
@@ -14,10 +14,5 @@ def mapper(file_input: str):
     """Create for each line an matrix and send this to the reduce function"""
     data = read_input(file_input)
 
-    for x in data:
-        matrix = create_matrix(x)
-
-
-
-
-mapper('../data/alice.txt')
+    matrix = [create_matrix(x) for x in data]
+    return matrix
