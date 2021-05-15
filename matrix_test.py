@@ -1,4 +1,4 @@
-from letterfrequency.matrix import create_matrix
+from matrix import create_matrix
 import numpy as np
 
 

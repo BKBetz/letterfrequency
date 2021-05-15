@@ -1,6 +1,7 @@
-from letterfrequency.mapper import mapper
-from letterfrequency.reducer import onebyonereduce
-from letterfrequency.matrix_test import test
+from mapper import mapper
+from reducer import onebyonereduce
+from matrix_test import test
+import sys
 
 
 def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
@@ -9,4 +10,11 @@ def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
     result = test(testStringOrFile, english_matrix, dutch_matrix)
     print(result)
 
-main("../data/alice.txt", "../data/nl.txt", "../data/sentences.nl-en.txt")
+
+if __name__ == "__main__":
+    # test_data is either a path to an txt file or a single string
+    for line in sys.stdin:
+        # call the test function foreach line
+        input = line.rstrip('\n')
+        main("data/alice.txt", "data/nl.txt", input)
+
