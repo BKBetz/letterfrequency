@@ -1,10 +1,11 @@
 import numpy as np
 
-matrix = None
-first_matrix = True
-
+# matrix filled with zero's
+matrix = np.zeros((28, 28))
 
 def onebyonereduce(all_matrices) -> np.array:
+    """Gives reduce() a single matrix as input and converts the matrix to percentages"""
+    # runs reduce() with every matrix
     for matrix in all_matrices:
         m = reduce(matrix)
 
@@ -15,15 +16,11 @@ def onebyonereduce(all_matrices) -> np.array:
 
 
 def reduce(new_matrix) -> np.array:
-    """Adds matrices together and gives the average"""
-    global matrix, first_matrix
+    """Adds matrices together"""
+    global matrix
 
-    if first_matrix == True:
-        matrix = new_matrix
-        first_matrix = False
-
-    else:
-        matrix = np.array([[(matrix[i][j] + new_matrix[i][j]) for j in range(len(matrix[0]))] for i in
-                           range(len(matrix))]).reshape((28, 28))
+    # adds two matrices together
+    matrix = np.array([[(matrix[i][j] + new_matrix[i][j]) for j in range(len(matrix[0]))] for i in
+                       range(len(matrix))]).reshape((28, 28))
 
     return matrix
