@@ -13,8 +13,6 @@ def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
 
 if __name__ == "__main__":
     # test_data is either a path to an txt file or a single string
-    for line in sys.stdin:
-        # call the test function foreach line
-        input = line.rstrip('\n')
-        main("data/alice.txt", "data/nl.txt", input)
+    input = sys.argv[1]
+    main("data/alice.txt", "data/nl.txt", input)
 
