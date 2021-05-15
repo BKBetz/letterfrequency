@@ -1,9 +1,12 @@
-from letterfrequency.mapper import mapper
-from letterfrequency.reducer import onebyonereduce
-from letterfrequency.matrix_test import answer
+from mapper import mapper
+from reducer import onebyonereduce
+from matrix_test import test
 
 
-english_matrix = onebyonereduce(mapper('../data/alice.txt'))
-dutch_matrix = onebyonereduce(mapper('../data/bzt.txt'))
-test = "my banana is krom omdat brandon is a lazy varken"
-print(answer(test, english_matrix, dutch_matrix))
+def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
+    english_matrix = onebyonereduce(mapper(pathToEnglishTxtFile))
+    dutch_matrix = onebyonereduce(mapper(pathToDutchTxtFile))
+    result = test(testStringOrFile, english_matrix, dutch_matrix)
+    print(result)
+
+main("data/alice.txt", "data/bzt.txt", "my banana is krom omdat brandon is a lazy varken")
