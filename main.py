@@ -1,6 +1,6 @@
-from mapper import mapper
-from reducer import onebyonereduce
-from matrix_test import test
+from letterfrequency.mapper import mapper
+from letterfrequency.reducer import onebyonereduce
+from letterfrequency.matrix_test import test
 
 
 def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
@@ -9,4 +9,4 @@ def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
     result = test(testStringOrFile, english_matrix, dutch_matrix)
     print(result)
 
-main("data/alice.txt", "data/bzt.txt", "my banana is krom omdat brandon is a lazy varken")
+main("../data/alice.txt", "../data/bzt.txt", "../data/sentences.nl-en.txt")

@@ -3,6 +3,7 @@ import numpy as np
 # matrix filled with zero's
 matrix = np.zeros((28, 28))
 
+
 def onebyonereduce(all_matrices) -> np.array:
     """Gives reduce() a single matrix as input and converts the matrix to percentages"""
     # runs reduce() with every matrix

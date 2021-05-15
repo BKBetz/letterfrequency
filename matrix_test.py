@@ -1,9 +1,6 @@
 from letterfrequency.matrix import create_matrix
 import numpy as np
 
-du = create_matrix('../data/bzt.txt')
-en = create_matrix('../data/alice.txt')
-
 
 def read_input(file: str) -> list:
     """Read the given file and seperate per line"""
@@ -14,8 +11,8 @@ def read_input(file: str) -> list:
 
 
 def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
-    en_count = 0
-    du_count = 0
+    total_loss_en = 0
+    total_loss_du = 0
     # convert string to matrix and convert that matrix to percentage matrix
     test_mat = create_matrix(test_str)
     test_sum = test_mat.sum()
@@ -26,15 +23,12 @@ def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
             if p_test_mat[x][y] > 0:
                 loss_en = en_matrix[x][y] - p_test_mat[x][y]
                 loss_du = du_matrix[x][y] - p_test_mat[x][y]
+                total_loss_du += loss_du
+                total_loss_en += loss_en
 
-                if loss_du < loss_en:
-                    du_count += 1
-                else:
-                    en_count += 1
+    totalloss = total_loss_en + total_loss_du
 
-    total = du_count + en_count
-
-    return {'dutch': du_count/total, 'english': en_count/total}
+    return {'dutch': total_loss_du/totalloss, 'english': total_loss_en/totalloss}
 
 
 def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
@@ -43,12 +37,17 @@ def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
         results = {'dutch': 0, 'english': 0}
         sentences = read_input(data)
         for sentence in sentences:
+            print('sentence', sentence)
             result = answer(sentence, en_matrix, du_matrix)
-            print(result)
+            print('result', result)
+            outcome = max(result, key=lambda key: result[key])
+            print('outcome', outcome)
+
+            results[outcome] += 1
+
+        return results
 
     except FileNotFoundError:
         # data is a string so we only return the answer function to show the percentage of english or dutch
         return answer(data, en_matrix, du_matrix)
 
-
-test('../data/sentences.nl-en.txt', en, du)
