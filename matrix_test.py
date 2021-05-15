@@ -1,13 +1,15 @@
 from letterfrequency.matrix import create_matrix
 import numpy as np
 
+du = create_matrix('../data/bzt.txt')
+en = create_matrix('../data/alice.txt')
 
-def read_input(file: str):
+
+def read_input(file: str) -> list:
     """Read the given file and seperate per line"""
-    with open(file) as f:
+    with open(file, encoding='utf-8') as f:
         # we use .read().splitlines() instead of .readlines() to remove "\n" in an easy way
         data = f.read().splitlines()
-
     return data
 
 
@@ -35,9 +37,18 @@ def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
     return {'dutch': du_count/total, 'english': en_count/total}
 
 
-def test(data: str) -> []:
+def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
     # if data is just one sentence we will return it once
-    sentences = read_input(data)
+    try:
+        results = {'dutch': 0, 'english': 0}
+        sentences = read_input(data)
+        for sentence in sentences:
+            result = answer(sentence, en_matrix, du_matrix)
+            print(result)
+
+    except FileNotFoundError:
+        # data is a string so we only return the answer function to show the percentage of english or dutch
+        return answer(data, en_matrix, du_matrix)
 
 
-test('hoi ik ben brandon')
+test('../data/sentences.nl-en.txt', en, du)
