@@ -11,37 +11,37 @@ def read_input(file: str) -> list:
 
 
 def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
-    total_loss_en = 0
-    total_loss_du = 0
-    # convert string to matrix and convert that matrix to percentage matrix
+    count_en = 0
+    count_du = 0
+    # convert string to matrix
     test_mat = create_matrix(test_str)
-    test_sum = test_mat.sum()
-    p_test_mat = np.array([(test_mat[x][y]/test_sum * 100) for x in range(len(test_mat)) for y in range(len(test_mat))]).reshape((28, 28))
 
-    for x in range(len(p_test_mat)):
-        for y in range(len(p_test_mat)):
-            if p_test_mat[x][y] > 0:
-                loss_en = en_matrix[x][y] - p_test_mat[x][y]
-                loss_du = du_matrix[x][y] - p_test_mat[x][y]
-                total_loss_du += loss_du
-                total_loss_en += loss_en
+    """ Compare each cell to the cells in the dutch and english matrix. 
+        Give a point to the one with the highest percentage. """
+    for x in range(len(test_mat)):
+        for y in range(len(test_mat)):
+            if test_mat[x][y] > 0:
+                if en_matrix[x][y] > du_matrix[x][y]:
+                    count_en += 1
+                else:
+                    count_du += 1
 
-    totalloss = total_loss_en + total_loss_du
+    # add the two counts up and use it to get an average score for each language
+    total = count_en + count_du
 
-    return {'dutch': total_loss_du/totalloss, 'english': total_loss_en/totalloss}
+    return {'dutch':  count_du / total, 'english': count_en / total}
 
 
 def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
     # if data is just one sentence we will return it once
     try:
+        # end results
         results = {'dutch': 0, 'english': 0}
         sentences = read_input(data)
         for sentence in sentences:
-            print('sentence', sentence)
+            # for each sentence get an answer. Take the highest outcome of the two answers and add that to the end result
             result = answer(sentence, en_matrix, du_matrix)
-            print('result', result)
             outcome = max(result, key=lambda key: result[key])
-            print('outcome', outcome)
 
             results[outcome] += 1
 

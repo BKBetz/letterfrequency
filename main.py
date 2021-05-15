@@ -9,4 +9,4 @@ def main(pathToEnglishTxtFile, pathToDutchTxtFile, testStringOrFile):
     result = test(testStringOrFile, english_matrix, dutch_matrix)
     print(result)
 
-main("../data/alice.txt", "../data/bzt.txt", "../data/sentences.nl-en.txt")
+main("../data/alice.txt", "../data/nl.txt", "../data/sentences.nl-en.txt")
