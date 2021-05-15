@@ -1,5 +1,5 @@
 from letterfrequency.matrix import create_matrix
-from letterfrequency.main import read_input
+from letterfrequency.matrix_test import read_input
 
 
 def mapper(file_input: str) -> []:

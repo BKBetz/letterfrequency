@@ -1,6 +1,14 @@
 from letterfrequency.matrix import create_matrix
-from letterfrequency.main import read_input
 import numpy as np
+
+
+def read_input(file: str):
+    """Read the given file and seperate per line"""
+    with open(file) as f:
+        # we use .read().splitlines() instead of .readlines() to remove "\n" in an easy way
+        data = f.read().splitlines()
+
+    return data
 
 
 def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
@@ -27,5 +35,9 @@ def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
     return {'dutch': du_count/total, 'english': en_count/total}
 
 
-def test(file: str) -> []:
+def test(data: str) -> []:
+    # if data is just one sentence we will return it once
+    sentences = read_input(data)
 
+
+test('hoi ik ben brandon')
