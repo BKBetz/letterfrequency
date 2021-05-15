@@ -4,7 +4,7 @@ matrix = None
 first_matrix = True
 
 
-def onebyonereduce(all_matrices):
+def onebyonereduce(all_matrices) -> np.array:
     for matrix in all_matrices:
         m = reduce(matrix)
 
@@ -14,7 +14,7 @@ def onebyonereduce(all_matrices):
     return p_matrix
 
 
-def reduce(new_matrix):
+def reduce(new_matrix) -> np.array:
     """Adds matrices together and gives the average"""
     global matrix, first_matrix
 

@@ -1,8 +1,9 @@
 from letterfrequency.matrix import create_matrix
+from letterfrequency.main import read_input
 import numpy as np
 
 
-def answer(test_str, en_matrix, du_matrix):
+def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
     en_count = 0
     du_count = 0
     # convert string to matrix and convert that matrix to percentage matrix
@@ -24,4 +25,7 @@ def answer(test_str, en_matrix, du_matrix):
     total = du_count + en_count
 
     return {'dutch': du_count/total, 'english': en_count/total}
+
+
+def test(file: str) -> []:
 
