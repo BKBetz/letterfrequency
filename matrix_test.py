@@ -11,25 +11,29 @@ def read_input(file: str) -> list:
 
 
 def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
-    count_en = 0
-    count_du = 0
-    # convert string to matrix
-    test_mat = create_matrix(test_str)
+    # blank space found
+    if test_str == "":
+        return {'english': 'empty'}
+    else:
+        count_en = 0
+        count_du = 0
+        # convert string to matrix
+        test_mat = create_matrix(test_str)
 
-    """ Compare each cell to the cells in the dutch and english matrix. 
-        Give a point to the one with the highest percentage. """
-    for x in range(len(test_mat)):
-        for y in range(len(test_mat)):
-            if test_mat[x][y] > 0:
-                if en_matrix[x][y] > du_matrix[x][y]:
-                    count_en += 1
-                else:
-                    count_du += 1
+        """ Compare each cell to the cells in the dutch and english matrix. 
+            Give a point to the one with the highest percentage. """
+        for x in range(len(test_mat)):
+            for y in range(len(test_mat)):
+                if test_mat[x][y] > 0:
+                    if en_matrix[x][y] > du_matrix[x][y]:
+                        count_en += 1
+                    else:
+                        count_du += 1
 
-    # add the two counts up and use it to get an average score for each language
-    total = count_en + count_du
+        # add the two counts up and use it to get an average score for each language
+        total = count_en + count_du
 
-    return {'dutch':  (count_du / total) * 100, 'english': (count_en / total) * 100}
+        return {'dutch':  (count_du / total) * 100, 'english': (count_en / total) * 100}
 
 
 def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
@@ -41,6 +45,10 @@ def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
         for sentence in sentences:
             # for each sentence get an answer. Take the highest outcome of the two answers and add that to the end result
             result = answer(sentence, en_matrix, du_matrix)
+            # blank space found
+            if result['english'] == 'empty':
+                continue
+
             outcome = max(result, key=lambda key: result[key])
 
             results[outcome] += 1
