@@ -29,7 +29,7 @@ def answer(test_str: str, en_matrix: np.array, du_matrix: np.array) -> dict:
     # add the two counts up and use it to get an average score for each language
     total = count_en + count_du
 
-    return {'dutch':  count_du / total, 'english': count_en / total}
+    return {'dutch':  (count_du / total) * 100, 'english': (count_en / total) * 100}
 
 
 def test(data: str, en_matrix: np.array, du_matrix: np.array) -> dict:
